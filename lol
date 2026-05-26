@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEREST STUDIO</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#050505;
+color:white;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+/* animated background */
+
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle at center,#00ff8833 0%,transparent 25%),
+linear-gradient(120deg,transparent 0%,#00ff8810 50%,transparent 100%);
+animation:bgMove 12s linear infinite;
+z-index:-2;
+}
+
+@keyframes bgMove{
+0%{
+transform:translate(-10%,-10%) rotate(0deg);
+}
+100%{
+transform:translate(-10%,-10%) rotate(360deg);
+}
+}
+
+/* grid */
+
+.grid{
+position:fixed;
+width:100%;
+height:100%;
+background-image:
+linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+background-size:40px 40px;
+z-index:-1;
+opacity:0.3;
+}
+
+/* container */
+
+.container{
+width:92%;
+max-width:1400px;
+margin:auto;
+padding-top:30px;
+}
+
+/* navbar */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 30px;
+border:1px solid rgba(255,255,255,0.1);
+border-radius:30px;
+background:rgba(255,255,255,0.03);
+backdrop-filter:blur(20px);
+margin-bottom:40px;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+color:#00ff88;
+text-shadow:0 0 15px #00ff88;
+letter-spacing:3px;
+}
+
+.menu{
+display:flex;
+gap:25px;
+flex-wrap:wrap;
+}
+
+.menu a{
+text-decoration:none;
+color:white;
+transition:0.3s;
+font-size:17px;
+cursor:pointer;
+}
+
+.menu a:hover{
+color:#00ff88;
+text-shadow:0 0 10px #00ff88;
+}
+
+/* pages */
+
+.page{
+display:none;
+}
+
+.active{
+display:block;
+}
+
+/* hero */
+
+.hero{
+text-align:center;
+padding:100px 20px 60px;
+}
+
+.hero h1{
+font-size:90px;
+line-height:1;
+color:#9cff2f;
+text-shadow:
+0 0 20px #9cff2f,
+0 0 40px #9cff2f;
+}
+
+.hero p{
+margin-top:25px;
+font-size:20px;
+color:#bbb;
+max-width:700px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.hero button{
+margin-top:40px;
+padding:18px 45px;
+border:none;
+border-radius:18px;
+background:#9cff2f;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 0 25px #9cff2f;
+}
+
+.hero button:hover{
+transform:scale(1.07);
+}
+
+/* cards */
+
+.cards{
+display:flex;
+gap:30px;
+justify-content:center;
+flex-wrap:wrap;
+padding-bottom:80px;
+}
+
+.card{
+width:320px;
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:30px;
+overflow:hidden;
+backdrop-filter:blur(15px);
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-12px);
+box-shadow:0 0 30px #00ff88;
+}
+
+.thumb{
+height:190px;
+background:
+linear-gradient(135deg,#9cff2f,#001a11);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.card-content{
+padding:20px;
+}
+
+.card-content h3{
+margin-bottom:10px;
+font-size:24px;
+}
+
+.card-content p{
+color:#aaa;
+line-height:1.5;
+}
+
+/* videos */
+
+.video-box{
+width:90%;
+max-width:700px;
+margin:20px auto;
+padding:20px;
+background:rgba(255,255,255,0.05);
+border-radius:25px;
+border:1px solid rgba(255,255,255,0.1);
+}
+
+video{
+width:100%;
+border-radius:20px;
+}
+
+/* forms */
+
+.form-box{
+width:90%;
+max-width:400px;
+margin:40px auto;
+padding:30px;
+border-radius:25px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
+}
+
+input{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:15px;
+background:#111;
+color:white;
+}
+
+.form-box button{
+width:100%;
+margin-top:20px;
+}
+
+/* upload */
+
+.upload-box{
+text-align:center;
+padding:50px;
+}
+
+.upload-box input{
+background:none;
+}
+
+/* responsive */
+
+@media(max-width:700px){
+
+.hero h1{
+font-size:55px;
+}
+
+nav{
+flex-direction:column;
+gap:20px;
+}
+
+.menu{
+justify-content:center;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="grid"></div>
+
+<div class="container">
+
+<nav>
+
+<div class="logo">EVEREST</div>
+
+<div class="menu">
+
+<a onclick="showPage('home')">Дом</a>
+
+<a onclick="showPage('videos')">Видео</a>
+
+<a onclick="showPage('account')">Аккаунт</a>
+
+<a onclick="openStudio()">Studio</a>
+
+</div>
+
+</nav>
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="hero">
+
+<h1>EVEREST<br>STUDIO</h1>
+
+<p>
+Futuristic neon platform with cyber atmosphere,
+glowing interface and smooth animations.
+</p>
+
+<button onclick="showPage('videos')">EXPLORE</button>
+
+</div>
+
+<section class="cards">
+
+<div class="card">
+
+<div class="thumb">
+GAME
+</div>
+
+<div class="card-content">
+<h3>Бубоскины</h3>
+<p>
+Наш единственный проект — Бубоскины.
+Это futuristic gaming universe от Everest Studio.
+</p>
+</div>
+
+</div>
+
+</section>
+
+</section>
+
+<!-- VIDEOS -->
+
+<section id="videos" class="page">
+
+<div class="hero">
+<h1>ВИДЕО</h1>
+<p>Смотри видео Everest Studio</p>
+</div>
+
+<div id="videoContainer"></div>
+
+</section>
+
+<!-- ACCOUNT -->
+
+<section id="account" class="page">
+
+<div class="hero">
+<h1>АККАУНТ</h1>
+<p>Создай аккаунт Everest Studio</p>
+</div>
+
+<div class="form-box">
+
+<input type="text" id="username" placeholder="Имя">
+
+<input type="password" id="userpassword" placeholder="Пароль">
+
+<button onclick="register()">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+
+</div>
+
+</section>
+
+<!-- STUDIO -->
+
+<section id="studio" class="page">
+
+<div class="hero">
+<h1>STUDIO</h1>
+<p>Загружай свои видео</p>
+</div>
+
+<div class="upload-box">
+
+<input type="file" id="videoUpload" accept="video/*">
+
+<button onclick="uploadVideo()">ЗАГРУЗИТЬ ВИДЕО</button>
+
+</div>
+
+</section>
+
+</div>
+
+<script>
+
+let registeredUser = "";
+
+function showPage(page){
+
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
+});
+
+document.getElementById(page).classList.add("active");
+
+}
+
+function register(){
+
+let username =
+document.getElementById("username").value;
+
+let password =
+document.getElementById("userpassword").value;
+
+if(username && password){
+
+registeredUser = username;
+
+alert("Аккаунт создан: " + username);
+
+}
+else{
+alert("Заполни все поля");
+}
+
+}
+
+function openStudio(){
+
+let password =
+prompt("Введите пароль Studio");
+
+if(password === "EVEREST studio film company (бубосины)"){
+
+showPage("studio");
+
+}
+else{
+
+alert("Неверный пароль");
+
+}
+
+}
+
+function uploadVideo(){
+
+let file =
+document.getElementById("videoUpload").files[0];
+
+if(!file){
+
+alert("Выберите видео");
+
+return;
+
+}
+
+let videoURL =
+URL.createObjectURL(file);
+
+let videoBox =
+document.createElement("div");
+
+videoBox.className = "video-box";
+
+videoBox.innerHTML = `
+<video controls>
+<source src="${videoURL}">
+</video>
+`;
+
+document.getElementById("videoContainer")
+.appendChild(videoBox);
+
+alert("Видео загружено!");
+
+showPage("videos");
+
+}
+
+</script>
+
+</body>
+</html>
